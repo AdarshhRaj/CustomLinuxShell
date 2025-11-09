@@ -1,48 +1,88 @@
-Custom Linux Shell in C++ 🖥️
+🚀 Custom UNIX/LINUX Shell
+This is a simple custom shell implemented in C++ that supports basic Unix commands, input/output redirection, piping, and command history.
 
-This project is a simple custom shell (command interpreter) written in C++ that can execute Linux commands, support redirection (> / <), and handle basic piping (|).
-It works similar to Bash for simple command execution.
+🌟 Features
+📂 Execute common Unix commands like ls, pwd, mkdir, etc.
+🔄 Input and output redirection using <, >, and 2>.
+🚰 Piping between commands using |.
+⏳ Background command execution using &.
+📜 Command history and recall using !! and !n.
+🚪 Creation and usage of named pipes (FIFOs) using mkfifo.
+🏁 Getting Started
+📋 Prerequisites
+🛠️ A C++ compiler (g++ recommended)
+🐧🍏 Unix-like operating system (Linux, macOS)
+🖥️ Compilation
+To compile the shell, use the following command:
 
-Features ✨
-Feature	Description
-Execute basic commands	ls, cat, touch, echo, mkdir, rmdir, ps aux etc.
-Input/Output Redirection	Uses < and > to redirect input/output
-Piping Support	Supports commands connected by `
-Interactive Prompt	Shows Custom Shell> for every command
-Exit	Type exit to leave the shell
-Demo Screenshots 📸
-Example	Description
-ls, mkdir, rmdir	Basic command execution
-echo "Hello" > file.txt	Output redirection
-cat file.txt	Display file contents
-ps aux	Process listing
+g++ -o custom_shell custom_shell.cpp
+▶️ Running the Shell
+After compiling, you can run the shell with:
 
-(Add screenshots here in GitHub by uploading them into /screenshots folder)
+./custom_shell
+💡 Usage
+📝 Basic Commands
+You can run basic Unix commands like pwd, ls, mkdir, etc. Example:
 
-How to Run the project 🔧
-g++ init.cpp
-./a.out
+( Enter Command ) : pwd
+↪️ ↩️ Input/Output Redirection
+Redirect input from a file using <, and output to a file using >. Example:
 
-Tech Stack Used
+( Enter Command ) : sort < input.txt > output.txt
+Redirect standard error using 2>. Example:
 
-C++
+( Enter Command ) : ls non_existent_file 2> error.txt
+🔗 Piping
+Use | to pipe the output of one command to another. Example:
 
-Linux System Calls (fork, execvp, waitpid, open, dup2)
+( Enter Command ) : sort testing.txt | grep anyword | cat > a.txt
+🔄 Background Execution
+Run a command in the background using &. Example:
 
-GCC Compiler
+( Enter Command ) : sort testing.txt > sorted.txt &
+📜 Command History
+View command history with history.
+Recall the most recent command with !!.
+Recall a specific command with !n (where n is the command number).
+🚪 Named Pipes (FIFOs)
+Create a named pipe using mkfifo. Example:
 
-Folder Structure
-.
-├── init.cpp          # main shell source file
-├── README.md         # documentation
-└── screenshots/      # screenshots (optional)
+( Enter Command ) : mkfifo fifo1
+Write to and read from a named pipe:
 
-Future Enhancements 🚀
+( Enter Command ) : cat fifo1&
+( Enter Command ) : echo "hello" > fifo1
+💻 Example Commands
+pwd
+ls
+ls -l
+mkdir folderName
+exit
+&command (e.g., &pwd)
+sort < input.txt > output.txt
+cd directoryPath
+ls non_existent_file 2> error.txt
+man ls > ls.dat
+cat input.txt
+cat input.txt output.txt > combined.txt
+tr -s '[:space:]' '\n' < sortingFile.txt
+sort testing.txt | grep anyword | cat > a.txt
+sort testing.txt | grep anyword > a.txt | wc -l
+sort ls.dat | tee a.txt
+touch newFile.txt
+nano newFile.txt
+echo "coding is fun" > fifo1
+rm fifo1
+echo "code"
+sort testing.txt | tee a.txt
+sort testing.txt | tee a.txt | wc -l
+sort a.txt > fifo1
+ls | tee listing.txt | grep .cpp
+📝 Note on FIFOs
+When writing data to a FIFO, the write will block until another process reads from it. Ensure that there is a process reading from the FIFO to avoid indefinite blocking.
 
-Support background execution (&)
+🌍 Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests. 🤝
 
-Maintain command history
-
-Add autocomplete using TAB
-
-Add job control (fg / bg / jobs / kill)
+📄 License
+This project is licensed under the MIT License. See the LICENSE file for details.
